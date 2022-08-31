@@ -1,5 +1,6 @@
 import * as Factory from './factory'
 import * as Universe from './universe'
+import * as Events from './events'
 
 export default async (
 	{ debug, helpers } : {
@@ -7,6 +8,9 @@ export default async (
 		helpers: boolean,	// show helpers
 	}
 ) => {
+
+	// Container
+	const container = document.querySelector<HTMLElement>('#webgl-container')!
 
 	// Scene
 	const scene = new Factory.Scene( {
@@ -16,18 +20,15 @@ export default async (
 
 	// Renderer (WebGL version: 2)
 	const renderer = new Factory.Renderer( {
-		container: document.querySelector<HTMLElement>('#webgl-container')!,
+		container,
 	})
-
-	// HTMLCanvasElement
-	const canvas = renderer.object.domElement
 
 	// Camera (Perspective)
 	const camera = new Factory.Camera( {
 		// https://en.wikipedia.org/wiki/Field_of_view_in_video_games#Choice_of_field_of_view
 		fov: 60,
 		// https://en.wikipedia.org/wiki/Aspect_ratio_(image)
-		aspect: canvas.offsetWidth / canvas.offsetHeight,
+		aspect: container.offsetWidth / container.offsetHeight,
 		// 10cm
 		near: 0.1,
 		// 1.5km
@@ -43,6 +44,14 @@ export default async (
 	Universe.build( {
 		debug,
 		scene,
+	} )
+
+	// Listen events
+	Events.listen( {
+		debug,
+		container,
+		renderer,
+		camera,
 	} )
 
 	// https://threejs.org/docs/index.html?q=WebGl#api/en/renderers/WebGLRenderer.setAnimationLoop
