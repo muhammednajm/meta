@@ -1,4 +1,5 @@
 import * as Factory from './factory'
+import * as Universe from './universe'
 
 export default async (
 	{ debug, helpers } : {
@@ -6,8 +7,6 @@ export default async (
 		helpers: boolean,	// show helpers
 	}
 ) => {
-
-	console.log( 'Init', debug )
 
 	// Scene
 	const scene = new Factory.Scene( {
@@ -37,8 +36,23 @@ export default async (
 		initialPosition: [0, 2, 5],
 	} )
 
+	/*
+		Create world
+		https://en.wikipedia.org/wiki/Fictional_universe
+	*/
+	Universe.build( {
+		debug,
+		scene,
+	} )
+
+	// https://threejs.org/docs/index.html?q=WebGl#api/en/renderers/WebGLRenderer.setAnimationLoop
 	renderer.object.setAnimationLoop( () => {
 
-		renderer.object.render( scene.object, camera.object )
+		// Animation logic (a.k.a Game loop)
+		Universe.update( {
+			scene,
+			renderer,
+			camera,
+		} )
 	} )
 }
