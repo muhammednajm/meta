@@ -15,4 +15,10 @@ export default async (
 	} )
 
 	console.log( scene )
+
+	const renderer = new Factory.Renderer( {
+		container: document.querySelector<HTMLElement>('#webgl-container')!,
+	})
+
+	console.log( renderer )
 }
