@@ -1,3 +1,11 @@
 import './main.css'
+import init from './init'
 
-console.log( 'Ready to work...' )
+;( async () => {
+
+	await init( {
+		debug: true,	// show logs
+		helpers: true,	// show helpers
+	} )
+
+} )()
