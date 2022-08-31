@@ -11,16 +11,14 @@ export default async (
 
 	// Scene
 	const scene = new Factory.Scene( {
-		background: 0xFFA500,
+		background: 0xFFFFFF,
 		helperSize: helpers ? 1000 : 0,
 	} )
-	console.log( scene.object )
 
 	// Renderer (WebGL version: 2)
 	const renderer = new Factory.Renderer( {
 		container: document.querySelector<HTMLElement>('#webgl-container')!,
 	})
-	console.log( renderer.object )
 
 	// HTMLCanvasElement
 	const canvas = renderer.object.domElement
@@ -38,5 +36,9 @@ export default async (
 		// [0, 2, 5] = [x, y, z]
 		initialPosition: [0, 2, 5],
 	} )
-	console.log( camera.object )
+
+	renderer.object.setAnimationLoop( () => {
+
+		renderer.object.render( scene.object, camera.object )
+	} )
 }
