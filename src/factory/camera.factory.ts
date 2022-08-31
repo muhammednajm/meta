@@ -4,6 +4,8 @@ import {
 
 export default class {
 
+	public object: PerspectiveCamera
+
 	constructor (
 		options : {
 			// https://en.wikipedia.org/wiki/Field_of_view
@@ -27,11 +29,9 @@ export default class {
 		const [x, y, z] = options.initialPosition
 
 		// https://en.wikipedia.org/wiki/3D_projection#Perspective_projection
-		const camera = new PerspectiveCamera( fov, aspect, near, far )
+		this.object = new PerspectiveCamera( fov, aspect, near, far )
 
 		// Set initial position
-		camera.position.set( x, y, z )
-
-		return camera
+		this.object.position.set( x, y, z )
 	}
 }

@@ -4,6 +4,8 @@ import {
 
 export default class {
 
+	public object: WebGLRenderer
+
 	constructor (
 		{ container, } : {
 			// Container element for canvas
@@ -12,7 +14,7 @@ export default class {
 	) {
 
 		// WebGL version: 2
-		const renderer = new WebGLRenderer( {
+		this.object = new WebGLRenderer( {
 			antialias: true,
 		} )
 
@@ -20,13 +22,11 @@ export default class {
 			https://en.wikipedia.org/wiki/Pixel_aspect_ratio
 			Set pixel aspect ratio
 		*/
-		renderer.setPixelRatio( window.devicePixelRatio )
+		this.object.setPixelRatio( window.devicePixelRatio )
 		// Set canvas size
-		renderer.setSize( container.offsetWidth, container.offsetHeight )
+		this.object.setSize( container.offsetWidth, container.offsetHeight )
 		
 		// Append canvas element to container
-		container.appendChild( renderer.domElement )
-
-		return renderer
+		container.appendChild( this.object.domElement )
 	}
 }

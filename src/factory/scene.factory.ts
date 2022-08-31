@@ -7,6 +7,8 @@ import {
 
 export default class {
 
+	public object: Scene
+
 	constructor (
 		{ background, helperSize, } : {
 			// Scene background color
@@ -21,18 +23,21 @@ export default class {
 		}
 	) {
 
-		const scene = new Scene()
-		scene.background = new Color( background )
+		this.object = new Scene()
+		this.object.background = new Color( background )
 
 		if ( helperSize > 0 ) {
 
 			// Axes helper (X, Y, Z) = (Red, Green, Blue)
-			scene.add( new AxesHelper( helperSize ) )
+			this.object.add( new AxesHelper( helperSize ) )
 
 			// Grid helper (in meters)
-			scene.add( new GridHelper( helperSize, helperSize ) )
+			this.object.add( new GridHelper( helperSize, helperSize ) )
 		}
+	}
 
-		return scene
+	getX(): number {
+
+		return 1
 	}
 }
