@@ -35,9 +35,4 @@ export default class {
 			this.object.add( new GridHelper( helperSize, helperSize ) )
 		}
 	}
-
-	getX(): number {
-
-		return 1
-	}
 }
