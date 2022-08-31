@@ -41,7 +41,7 @@ export default async (
 		Create world
 		https://en.wikipedia.org/wiki/Fictional_universe
 	*/
-	Universe.build( {
+	const universe = Universe.build( {
 		debug,
 		scene,
 	} )
@@ -54,6 +54,9 @@ export default async (
 		camera,
 	} )
 
+	// Main clock
+	const clock = new Factory.Clock()
+
 	// https://threejs.org/docs/index.html?q=WebGl#api/en/renderers/WebGLRenderer.setAnimationLoop
 	renderer.object.setAnimationLoop( () => {
 
@@ -62,6 +65,7 @@ export default async (
 			scene,
 			renderer,
 			camera,
-		} )
+			clock: clock,
+		}, universe )
 	} )
 }
