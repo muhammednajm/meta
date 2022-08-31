@@ -9,24 +9,28 @@ export default async (
 
 	console.log( 'Init', debug )
 
+	// Scene
 	const scene = new Factory.Scene( {
 		background: 0xFFA500,
 		helperSize: helpers ? 1000 : 0,
 	} )
+	console.log( scene.object )
 
-	console.log( scene )
-
+	// Renderer (WebGL version: 2)
 	const renderer = new Factory.Renderer( {
 		container: document.querySelector<HTMLElement>('#webgl-container')!,
 	})
+	console.log( renderer.object )
 
-	console.log( renderer )
+	// HTMLCanvasElement
+	const canvas = renderer.object.domElement
 
+	// Camera (Perspective)
 	const camera = new Factory.Camera( {
 		// https://en.wikipedia.org/wiki/Field_of_view_in_video_games#Choice_of_field_of_view
 		fov: 60,
 		// https://en.wikipedia.org/wiki/Aspect_ratio_(image)
-		aspect: 1,
+		aspect: canvas.offsetWidth / canvas.offsetHeight,
 		// 10cm
 		near: 0.1,
 		// 1.5km
@@ -34,6 +38,5 @@ export default async (
 		// [0, 2, 5] = [x, y, z]
 		initialPosition: [0, 2, 5],
 	} )
-
-	console.log( camera )
+	console.log( camera.object )
 }
