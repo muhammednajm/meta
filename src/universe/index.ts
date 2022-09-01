@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import * as Factory from '../factory'
 
 /*
@@ -6,23 +5,17 @@ import * as Factory from '../factory'
 	https://en.wikipedia.org/wiki/Fictional_universe
 */
 const build = ( {
-	scene,
 	debug,
 }: {
 	debug: boolean,
 	scene: Factory.Scene,
+	camera: Factory.Camera,
 } ) => {
 
-	const universe: { [ key: string ]: any } = {}
+	const keys: { [ key: string ]: boolean } = {}
 
-	{
-		// Create helper object for camera states
-		const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 )
-		const material = new THREE.MeshNormalMaterial()
-		const mesh = new THREE.Mesh( geometry, material )
-
-		scene.object.add( mesh )
-		universe.pointer = mesh
+	const universe: { [ key: string ]: any } = {
+		keys: keys,
 	}
 
 	if ( debug ) {
@@ -32,23 +25,27 @@ const build = ( {
 	return universe
 }
 
+/*
+	Update
+*/
 const update = ( {
 	scene,
 	renderer,
 	camera,
 	clock,
+	controls,
 }: {
 	scene: Factory.Scene,
 	renderer: Factory.Renderer,
 	camera: Factory.Camera,
 	clock: Factory.Clock,
-}, universe: any ) => {
+	controls: Factory.Controls,
+} ) => {
 
 	const delta = clock.delta()
 
-	universe.pointer.rotation.y -= delta
+	controls.update( delta )
 
-	// render
 	renderer.object.render( scene.object, camera.object )
 }
 

@@ -33,8 +33,8 @@ export default async (
 		near: 0.1,
 		// 1.5km
 		far: 1500,
-		// [0, 2, 5] = [x, y, z]
-		initialPosition: [0, 2, 5],
+		// [0, 2, 6] = [x, y, z]
+		initialPosition: [0, 1, 5],
 	} )
 
 	/*
@@ -44,7 +44,14 @@ export default async (
 	const universe = Universe.build( {
 		debug,
 		scene,
+		camera,
 	} )
+
+	// Controls
+	const controls = new Factory.Controls( {
+		camera,
+	}, universe )
+	controls.moveSpeed = 10
 
 	// Listen events
 	Events.listen( {
@@ -52,7 +59,7 @@ export default async (
 		container,
 		renderer,
 		camera,
-	} )
+	}, universe )
 
 	// Main clock
 	const clock = new Factory.Clock()
@@ -65,7 +72,8 @@ export default async (
 			scene,
 			renderer,
 			camera,
+			controls,
 			clock: clock,
-		}, universe )
+		} )
 	} )
 }

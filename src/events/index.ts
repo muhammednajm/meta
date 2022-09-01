@@ -10,7 +10,10 @@ export const listen = ( {
 	container: HTMLElement,
 	renderer: Factory.Renderer,
 	camera: Factory.Camera,
-} ) => {
+}, universe: any ) => {
+
+	window.addEventListener( 'keydown', e => universe.keys[e.code] = true )
+	window.addEventListener( 'keyup', e => universe.keys[e.code] = false )
 
 	window.addEventListener( 'resize', () => {
 
